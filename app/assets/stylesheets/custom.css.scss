@@ -33,10 +33,9 @@ textarea {
 
 .center {
   text-align: center;
-}
-
-.center h1 {
+ h1 {
   margin-bottom: 10px;
+}
 }
 
 /* typography */
@@ -78,13 +77,11 @@ p {
   padding-top: 9px;
   font-weight: bold;
   line-height: 1;
-}
-
-#logo:hover {
+&:hover {
   color: #aaa;
   text-decoration: none;
 }
-
+}
 /* footer */
 
 footer {
@@ -94,26 +91,24 @@ footer {
   color: #999;
   padding-right: 10px;
   padding-left: 20px;
-}
-
-footer a {
+ a {
   color: #555;
-}
-
-footer a:hover {
+&:hover {
   color: #222;
 }
-
-footer small {
+ }
+ small {
   float: left;
 }
 
-footer ul {
+ ul {
   float: right;
   list-style: none;
-}
 
-footer ul li {
+
+ li {
   float: left;
   margin-left: 10px;
+}
+ }
 }
