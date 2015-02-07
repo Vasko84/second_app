@@ -6,6 +6,8 @@ gem 'rails', '4.0.2'
 gem 'execjs'
 gem 'therubyracer'
 gem 'bootstrap-sass'
+gem 'bcrypt-ruby'
+gem 'bcrypt'
 group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
