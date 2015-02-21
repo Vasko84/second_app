@@ -33,4 +33,7 @@ SecondApp::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  
+  #minimize time for testing user (by lowering bcrypt cost for passwords)
+  ActiveModel::SecurePassword.min_cost = true
 end
