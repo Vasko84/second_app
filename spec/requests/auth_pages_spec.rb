@@ -51,9 +51,42 @@ describe "AuthPages" do
         describe "sending PATCH" do
           before { put user_path(user) }
           
-          specify {expect(response).to eq redirect_to(signin_path)}
+          specify {expect(response).to redirect_to(signin_path)}
         end
       end
+      
+      describe "when attemting visit protected page" do
+        before do
+          visit edit_user_path(user)
+          fill_in "Email", with: user.email
+          fill_in "Password", with: user.password
+          click_button "Sign in"
+        end
+        
+        it "should redirect back to edit page" do
+          expect(page).to have_title("Edit user")
+        end
+      end
+    end
+    
+    describe "as wrong user" do
+      let(:user) {FactoryGirl.create(:user)}
+      let(:wrong_user) {FactoryGirl.create(:user, email:"wrong@example.com")}
+      
+      before {sign_in user, no_capybara: true}
+      
+      describe "get edit page" do
+        before {get edit_user_path(wrong_user)}
+        
+        specify {expect(response.body).not_to match('Edit user')}
+        specify {expect(response).to redirect_to(root_url)}
+      end
+      
+      describe "patch user" do
+        before {patch user_path(wrong_user)}
+        specify {expect(response).to redirect_to(root_url)}
+      end
+      
     end
   end
 end
