@@ -119,4 +119,21 @@ describe "User Pages" do
       
   end
   
+  describe "index page" do
+    before do
+      r_user=FactoryGirl.create(:user)
+      sign_in r_user
+      FactoryGirl.create(:user, name: "Bob", email: "B@B.B")
+      FactoryGirl.create(:user, name: "Any", email: "A@A.a")
+      visit users_path
+    end
+    
+    it {should have_title("All users")}
+    it {should have_content("All users")}
+    it "should list users" do 
+      User.all.each do |user|
+        expect(page).to have_selector("li", text: user.name)
+      end
+    end
+  end
 end
