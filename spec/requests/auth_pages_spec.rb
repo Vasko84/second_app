@@ -6,6 +6,8 @@ describe "AuthPages" do
   
   it {should have_title("Sign in")}
   it {should have_content("Sign in")}
+  it {should_not have_link("Settings")}
+  it {should_not have_link("Profile")}
   
   describe "sign in" do
     describe "with invalid information" do
@@ -91,6 +93,18 @@ describe "AuthPages" do
         specify {expect(response).to redirect_to(root_url)}
       end
       
+    end
+    
+    describe "as non-admin user" do
+      let(:user) {FactoryGirl.create(:user)}
+      let(:non_admin_user) {FactoryGirl.create(:user)}
+      
+      before { sign_in non_admin_user, no_capybara: true }
+      
+      describe "submitting DELETE request to user" do
+        before {delete user_path(user)}
+        specify {expect(response).to redirect_to(root_url)}
+      end
     end
   end
 end
